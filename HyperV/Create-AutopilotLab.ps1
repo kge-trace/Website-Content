@@ -48,7 +48,7 @@ Function Invoke-Header {
         Write-Host " |_|  |_|\__, | .__/ \___|_|    \/     |______\__,_|_.__/     |_|\___/ \___/|_|"
         Write-Host "          __/ | |                                                              "
         Write-Host "         |___/|_|                                                              "
-        Write-Host "`n        >>> Version $Version | To be run on the HyperV Server server <<<" -ForegroundColor Yellow
+        Write-Host "`n        >>> Version $Version | To be run on the HyperV Server <<<" -ForegroundColor Yellow
 
 } # Invoke-Header - Needs Editing
 
@@ -113,10 +113,10 @@ Function Invoke-LabVMPreRequisites {
 
     if (-not $isAdmin) {
         Write-Host "`n[ERROR] This script must be run as Administrator." -ForegroundColor Red
-        return $false
+        return
     }
 
-    Write-Host " ✔ Running with administrative privileges." -ForegroundColor Green
+    Write-Host "Running with administrative privileges." -ForegroundColor Green
 
 
     # -------------------------
@@ -127,7 +127,7 @@ Function Invoke-LabVMPreRequisites {
         return $false
     }
 
-    Write-Host " ✔ Hyper-V PowerShell module is available." -ForegroundColor Green
+    Write-Host "Hyper-V PowerShell module is available." -ForegroundColor Green
 
 
     # -------------------------
@@ -143,7 +143,7 @@ Function Invoke-LabVMPreRequisites {
         return $false
     }
 
-    Write-Host " ✔ Hyper-V Role is enabled." -ForegroundColor Green
+    Write-Host "Hyper-V Role is enabled." -ForegroundColor Green
     Start-Sleep 2
 
     Invoke-MainMenu
