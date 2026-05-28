@@ -29,7 +29,6 @@ $BasePath   = "D:\VIRTUAL_MACHINES\LAB" # Root path for all VMs
 $ToolsPath  = "D:\VIRTUAL_MACHINES\TOOLS"
 $ClientIsoPath = "$ToolsPath\ISO_STORE_OS_CLIENT" # Root path for all Client Operating System ISOs
 $ServerIsoPath = "$ToolsPath\ISO_STORE_OS_SERVER" # Root path for all Server Operating System ISOs          
-$VhdFolder  = Join-Path $VMRootPath "Virtual Harddisks"
 $SwitchName = "EXTERNAL NETWORK"
 
 #---------------------Begin---------------------#
@@ -249,10 +248,15 @@ Function New-LabVMTemplate {
     # Prevent duplicate VM names
     if (Get-VM -Name $VMName -ErrorAction SilentlyContinue) {
         Write-Error "A VM named '$VMName' already exists."
+        Start-Sleep -Seconds 5
         return
     }
 
+    #Create VMRootPath
+    $VMRootPath = Join-Path $Basepath $VMName
+   
     # Create VHD folder (Hyper-V will create the VM folder + 'Virtual Machines' under $BasePath)
+    $VhdFolder  = Join-Path $VMRootPath "Virtual Harddisks"
     $null = New-Item -ItemType Directory -Path $VhdFolder -Force
 
     # VM configuration
